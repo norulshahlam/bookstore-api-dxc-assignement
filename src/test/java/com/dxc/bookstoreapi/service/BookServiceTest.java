@@ -159,7 +159,6 @@ class BookServiceTest {
         // Update title
         book2.setTitle("Changed title");
         BookResponse<Book> updatedBook = service.updateBook(updateBookRequest);
-        System.out.println(updatedBook);
         assertThat(updatedBook.getData().getTitle()).isEqualTo("Changed title");
         assertThat(updatedBook.getStatus()).isEqualTo(SUCCESS);
     }
