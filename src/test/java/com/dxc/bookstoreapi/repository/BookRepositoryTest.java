@@ -1,6 +1,9 @@
 package com.dxc.bookstoreapi.repository;
 
 import com.dxc.bookstoreapi.model.entity.Book;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +50,12 @@ class BookRepositoryTest {
         assertThat(byTitleAndAuthor.size()).isGreaterThan(0);
     }
 
-
+    @Test
+    void checkForPreLoadedData() throws JsonProcessingException {
+        List<Book> preloadedBooks = repository.findAll();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        System.out.println(objectMapper.writeValueAsString(preloadedBooks));
+        assertThat(preloadedBooks).hasSize(2);
+    }
 }
