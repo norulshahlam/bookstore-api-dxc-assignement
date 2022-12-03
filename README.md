@@ -53,7 +53,7 @@
 </details>  
 
 
-Hostname for localhost: `http://localhost:8083`
+Hostname for localhost: `http://localhost:8083`  
 Hostname for production: `https://bookstore-api-dxc-assignement.herokuapp.com`  
 
 ### How to use?
