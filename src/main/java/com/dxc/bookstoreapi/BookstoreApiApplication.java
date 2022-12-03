@@ -1,0 +1,65 @@
+package com.dxc.bookstoreapi;
+
+import com.dxc.bookstoreapi.model.entity.Author;
+import com.dxc.bookstoreapi.model.entity.Book;
+import com.dxc.bookstoreapi.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Year;
+import java.util.Arrays;
+
+
+@SpringBootApplication
+public class BookstoreApiApplication implements CommandLineRunner {
+
+	@Autowired
+	private BookRepository repository;
+
+	public static void main(String[] args) {
+		SpringApplication.run(BookstoreApiApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		Author author1 = Author.builder()
+				.name("John")
+				.birthday(LocalDate.of(1985, 8, 30))
+				.build();
+		Author author2 = Author.builder()
+				.name("Bob")
+				.birthday(LocalDate.of(1970, 8, 30))
+				.build();
+		Author author3 = Author.builder()
+				.name("Adam")
+				.birthday(LocalDate.of(1971, 8, 30))
+				.build();
+		Author author4 = Author.builder()
+				.name("Peter")
+				.birthday(LocalDate.of(1995, 8, 30))
+				.build();
+
+		Book book1 = Book.builder()
+				.author(Arrays.asList(author1, author2))
+				.title("Ghostbusters")
+				.genre("Horror")
+				.year(Year.of(2000))
+				.price(BigDecimal.valueOf(25.50))
+				.build();
+
+		Book book2 = Book.builder()
+				.author(Arrays.asList(author4, author3))
+				.title("Stock trading")
+				.genre("Finance")
+				.year(Year.of(2000))
+				.price(BigDecimal.valueOf(75.20))
+				.build();
+
+		repository.saveAll(Arrays.asList(book1,book2));
+	}
+}
+
