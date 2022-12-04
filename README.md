@@ -81,7 +81,7 @@ password: password
 •	Delete book (Restricted permission) - ROLES_ADMIN
 
 ```
-7. If you are using production url, you may skip step 1 & 2
+7. If you are using production url, you may skip step 1, 2 & 3
 8. Too lazy to go through the steps? Wish you could just test it right away on any device? Good news! Swagger to the rescue! Just hit this url on any device! Make sure you enter the credentials given above
 ```
     https://bookstore-api-dxc-assignement.herokuapp.com/swagger-ui/index.html
