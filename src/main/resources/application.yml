@@ -2,6 +2,8 @@ openapi:
   project-title: @project.name@
   project-version: @project.version@
   project-description: @project.description@
+spring-doc:
+  pathsToMatch: /api/v1/**
 spring:
   jpa:
     hibernate:
