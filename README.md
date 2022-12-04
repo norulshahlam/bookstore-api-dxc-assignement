@@ -82,7 +82,10 @@ password: password
 
 ```
 7. If you are using production url, you may skip step 1 & 2
-
+8. Too lazy to go through the steps? Wish you could just test it right away on any device? Good news! Swagger to the rescue! Just hit this url on any device!
+```
+    https://bookstore-api-dxc-assignement.herokuapp.com/swagger-ui/index.html
+```
 8. For any issues, email me at norulshahlam@gmail.com or whatsapp me at +6592212152
 
 ### HAPPY CODING!
