@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UpdateBookRequest extends CreateBookRequest {
 
-    
+
     private UUID isbn;
 
 }
