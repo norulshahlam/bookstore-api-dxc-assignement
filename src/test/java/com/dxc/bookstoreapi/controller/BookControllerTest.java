@@ -118,20 +118,30 @@ class BookControllerTest {
 
     }
 
+    /**
+     * Check that other roles is forbidden to perform this operation.
+     *
+     * @throws Exception
+     */
     @Test
-    void deleteBook_unauthorized() throws Exception {
-        mockMvc.perform(delete(API_V1 + DELETE_BOOK))
+    @WithMockUser("USER")
+    void deleteBook_forbidden() throws Exception {
+        mockMvc.perform(delete(API_V1 + DELETE_BOOK + "/" + savedBook.getIsbn()))
                 .andDo(print())
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isForbidden());
     }
 
-    @WithMockUser("ADMIN")
+    /**
+     * Check that only ADMIN role can perform this operation.
+     * @throws Exception
+     */
+    @WithMockUser(roles = {"ADMIN"})
     @Test
     void deleteBook_authorized() throws Exception {
         /**
          * TODO Not enough variable values available to expand ‘variableName’ error
          */
-        mockMvc.perform(delete(API_V1 + DELETE_BOOK + "/" + savedBook.getIsbn()))
+        mockMvc.perform(delete(API_V1 + DELETE_BOOK + "/" + savedBook.getIsbn().toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
     }

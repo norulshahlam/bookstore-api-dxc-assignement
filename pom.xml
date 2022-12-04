@@ -15,6 +15,7 @@
 	<description>Assignment for Client assessment</description>
 	<properties>
 		<java.version>11</java.version>
+		<springdoc.version>1.6.13</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -82,12 +83,23 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- Swagger UI -->
+		<!-- Documentation -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.13</version>
+			<version>${springdoc.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-data-rest</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-security</artifactId>
+			<version>${springdoc.version}</version>
+		</dependency>
+		<!-- END of Documentation -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

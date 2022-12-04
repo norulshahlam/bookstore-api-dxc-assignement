@@ -56,6 +56,6 @@ class BookRepositoryTest {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         System.out.println(objectMapper.writeValueAsString(preloadedBooks));
-        assertThat(preloadedBooks).hasSize(2);
+        assertThat(preloadedBooks).hasSizeGreaterThan(2);
     }
 }

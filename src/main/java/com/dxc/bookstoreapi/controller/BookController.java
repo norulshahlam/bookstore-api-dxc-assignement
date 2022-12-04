@@ -5,6 +5,8 @@ import com.dxc.bookstoreapi.model.request.CreateBookRequest;
 import com.dxc.bookstoreapi.model.request.UpdateBookRequest;
 import com.dxc.bookstoreapi.model.response.BookResponse;
 import com.dxc.bookstoreapi.service.BookService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +48,7 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
+    @Operation(security = @SecurityRequirement(name = "basicAuth"))
     @DeleteMapping(DELETE_BOOK + "/{isbn}")
     public ResponseEntity<BookResponse<UUID>> deleteBook(@PathVariable UUID isbn) {
         BookResponse<UUID> deleteSuccess = service.deleteBook(isbn);

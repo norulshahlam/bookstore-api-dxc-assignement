@@ -13,6 +13,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static com.dxc.bookstoreapi.model.Constants.API_V1;
+import static com.dxc.bookstoreapi.model.Constants.DELETE_BOOK;
 import static org.springframework.http.HttpMethod.DELETE;
 
 @Configuration
@@ -50,13 +51,13 @@ public class SecurityConfig {
                         .ignoringAntMatchers("/h2-console/**")
                         .disable())
                 .authorizeRequests(auth -> auth
-                        .antMatchers(
-                                "/v3/api-docs/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html").permitAll()
-                        .antMatchers("/h2-console/**").permitAll()
-                        .antMatchers(DELETE, API_V1 + "/delete-book**").hasAnyRole("ADMIN")
-                        .anyRequest().hasAnyRole("USER")
+//                        .antMatchers(
+//                                "/v3/api-docs/**",
+//                                "/swagger-ui/**",
+//                                "/swagger-ui.html").permitAll()
+                                .antMatchers("/h2-console/**").permitAll()
+                                .antMatchers(DELETE, API_V1 + DELETE_BOOK + "/**").hasAnyRole("ADMIN")
+                                .anyRequest().hasAnyRole("USER")
                 )
                 .headers(headers -> headers.frameOptions().sameOrigin())
                 .httpBasic(Customizer.withDefaults())
