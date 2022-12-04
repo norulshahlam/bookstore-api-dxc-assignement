@@ -2,6 +2,7 @@ package com.dxc.bookstoreapi.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,9 +31,12 @@ public class Author {
     )
     @JsonIgnore
     private UUID authorId;
+    @Schema(type = "string", example = "Tom Cruise")
     @Length(min = 3, message = "Author name must be minimum 3 character")
     private String name;
 
+    @Schema(example = "20-12-1985",
+            type = "string")
     @Past(message = "Birthday must be in the past!")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate birthday;

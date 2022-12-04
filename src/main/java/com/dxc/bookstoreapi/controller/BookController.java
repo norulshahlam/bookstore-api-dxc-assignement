@@ -6,6 +6,7 @@ import com.dxc.bookstoreapi.model.request.UpdateBookRequest;
 import com.dxc.bookstoreapi.model.response.BookResponse;
 import com.dxc.bookstoreapi.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,9 @@ public class BookController {
 
     @GetMapping(GET_BOOK_BY_TITLE_AUTHOR)
     public ResponseEntity<BookResponse<List<Book>>> getBookByTitleAndOrAuthor(
+            @Parameter(description = "Title of book", example = "Ghostbusters")
             @RequestParam(defaultValue = "") String title,
+            @Parameter(description = "Author of book", example = "Bob")
             @RequestParam(defaultValue = "") String author
     ) {
         log.info("in BookController::get-book-by-title-author");
@@ -50,7 +53,9 @@ public class BookController {
 
     @Operation(security = @SecurityRequirement(name = "basicAuth"))
     @DeleteMapping(DELETE_BOOK + "/{isbn}")
-    public ResponseEntity<BookResponse<UUID>> deleteBook(@PathVariable UUID isbn) {
+    public ResponseEntity<BookResponse<UUID>> deleteBook(
+            @Parameter(description = "unique id of book", example = "3fa85f64-5717-4562-b3fc-2c963f66afa6")
+            @PathVariable UUID isbn) {
         BookResponse<UUID> deleteSuccess = service.deleteBook(isbn);
         return ResponseEntity.status(HttpStatus.OK).body(deleteSuccess);
     }
