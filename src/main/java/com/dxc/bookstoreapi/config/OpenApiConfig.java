@@ -24,9 +24,8 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI(OpenApiProperties properties) {
-        var openApi = new OpenAPI()
+        return new OpenAPI()
                 .info(getInfo(properties));
-        return openApi;
     }
 
     private Info getInfo(OpenApiProperties properties) {

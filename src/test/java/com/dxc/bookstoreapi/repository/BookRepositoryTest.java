@@ -27,7 +27,7 @@ class BookRepositoryTest {
             log.info("Book found: {}", byTitle);
         } else
             log.info("Book not found");
-        assertThat(byTitle.size()).isGreaterThan(0);
+        assertThat(byTitle).isNotEmpty();
     }
 
     @Test
@@ -37,7 +37,7 @@ class BookRepositoryTest {
             log.info("Book found: {}", byAuthor);
         } else
             log.info("Book not found");
-        assertThat(byAuthor.size()).isGreaterThan(0);
+        assertThat(byAuthor).isNotEmpty();
     }
 
     @Test
@@ -47,7 +47,7 @@ class BookRepositoryTest {
             log.info("Book found: {}", byTitleAndAuthor);
         } else
             log.info("Book not found");
-        assertThat(byTitleAndAuthor.size()).isGreaterThan(0);
+        assertThat(byTitleAndAuthor).isNotEmpty();
     }
 
     @Test
