@@ -38,8 +38,9 @@ public class BookService {
         log.info("in BookService::addBook");
 
         // Deep copy
-        Book book1 = gson.fromJson(gson.toJson(book), Book.class);
-        Book savedBook = repository.save(book1);
+        Book book2 = new Book();
+        BeanUtils.copyProperties(book,book2);
+        Book savedBook = repository.save(book2);
         log.info("New book created: {}", savedBook);
         return successResponse(savedBook);
     }

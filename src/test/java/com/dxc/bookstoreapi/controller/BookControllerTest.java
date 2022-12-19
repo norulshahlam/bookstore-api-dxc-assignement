@@ -7,7 +7,6 @@ import com.dxc.bookstoreapi.repository.BookRepository;
 import com.dxc.bookstoreapi.service.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.google.gson.Gson;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,7 +51,6 @@ class BookControllerTest {
     private Book book1;
     private Book savedBook;
     ObjectMapper objectMapper = new ObjectMapper();
-    Gson gson = new Gson();
 
     @BeforeEach
     public void setUp() throws Exception {

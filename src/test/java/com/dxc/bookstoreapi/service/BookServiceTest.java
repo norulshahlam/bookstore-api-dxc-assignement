@@ -7,13 +7,13 @@ import com.dxc.bookstoreapi.model.request.CreateBookRequest;
 import com.dxc.bookstoreapi.model.request.UpdateBookRequest;
 import com.dxc.bookstoreapi.model.response.BookResponse;
 import com.dxc.bookstoreapi.repository.BookRepository;
-import com.google.gson.Gson;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class BookServiceTest {
 
+    public static final UUID ISBN = UUID.randomUUID();
     @Mock
     private BookRepository repository;
 
@@ -46,7 +47,6 @@ class BookServiceTest {
     ArrayList<Book> emptyResult = new ArrayList<>();
     BookException bookException = null;
     List<Book> foundBook = null;
-    Gson gson = new Gson();
 
     @BeforeEach
     void setUp() {
@@ -73,6 +73,8 @@ class BookServiceTest {
                 .year(Year.of(2000))
                 .price(BigDecimal.valueOf(25.50))
                 .build();
+
+
     }
 
     @Test
@@ -133,32 +135,33 @@ class BookServiceTest {
     void deleteBook() {
         // Book not found
         when(repository.findById(any())).thenReturn(Optional.empty());
-        bookException = assertThrows(BookException.class, () -> service.deleteBook(UUID.randomUUID()));
+        bookException = assertThrows(BookException.class, () -> service.deleteBook(ISBN));
         assertThat(bookException.getErrorMessage()).isEqualTo(BOOK_NOT_FOUND);
 
         // Delete success
         when(repository.findById(any())).thenReturn(Optional.of(book1));
-        BookResponse<UUID> deletedBook = service.deleteBook(UUID.randomUUID());
+        BookResponse<UUID> deletedBook = service.deleteBook(ISBN);
         assertThat(deletedBook.getData()).isInstanceOf(UUID.class);
         assertThat(deletedBook.getStatus()).isEqualTo(SUCCESS);
     }
 
     @Test
     void updateBook() {
-        UpdateBookRequest updateBookRequest = gson.fromJson(gson.toJson(book1), UpdateBookRequest.class);
+        UpdateBookRequest updateBookRequest2 = new UpdateBookRequest();
 
         // Book NOT found
+        BeanUtils.copyProperties(book1,updateBookRequest2);
         when(repository.findById(any())).thenReturn(Optional.empty());
-        bookException = assertThrows(BookException.class, () -> service.updateBook(updateBookRequest));
+        bookException = assertThrows(BookException.class, () -> service.updateBook(updateBookRequest2));
         assertThat(bookException.getErrorMessage()).isEqualTo(BOOK_NOT_FOUND);
 
         // Book found
         when(repository.findById(any())).thenReturn(Optional.of(book1));
-        Book book2 = gson.fromJson(gson.toJson(book1), Book.class);
-        when(repository.save(any())).thenReturn(book2);
+        when(repository.save(any())).thenReturn(book1);
+
         // Update title
-        book2.setTitle("Changed title");
-        BookResponse<Book> updatedBook = service.updateBook(updateBookRequest);
+        updateBookRequest2.setTitle("Changed title");
+        BookResponse<Book> updatedBook = service.updateBook(updateBookRequest2);
         assertThat(updatedBook.getData().getTitle()).isEqualTo("Changed title");
         assertThat(updatedBook.getStatus()).isEqualTo(SUCCESS);
     }

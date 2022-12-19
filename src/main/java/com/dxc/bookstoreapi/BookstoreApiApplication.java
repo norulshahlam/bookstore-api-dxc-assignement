@@ -3,7 +3,6 @@ package com.dxc.bookstoreapi;
 import com.dxc.bookstoreapi.model.entity.Author;
 import com.dxc.bookstoreapi.model.entity.Book;
 import com.dxc.bookstoreapi.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,8 +18,11 @@ import java.util.Arrays;
 @ConfigurationPropertiesScan
 public class BookstoreApiApplication implements CommandLineRunner {
 
-	@Autowired
 	private BookRepository repository;
+
+	public BookstoreApiApplication(BookRepository repository) {
+		this.repository = repository;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApiApplication.class, args);

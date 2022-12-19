@@ -16,4 +16,4 @@ spring:
     init:
       mode: always
   profiles:
-    active: dev
+    active: prod
