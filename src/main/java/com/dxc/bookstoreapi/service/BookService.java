@@ -6,7 +6,6 @@ import com.dxc.bookstoreapi.model.request.CreateBookRequest;
 import com.dxc.bookstoreapi.model.request.UpdateBookRequest;
 import com.dxc.bookstoreapi.model.response.BookResponse;
 import com.dxc.bookstoreapi.repository.BookRepository;
-import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class BookService {
 
     public static final String ENTER_TITLE_OR_AUTHOR_NAME = "Enter title or author name";
-    Gson gson = new Gson();
 
     public static final String BOOK_NOT_FOUND = "Book not found";
     public static final String BOOK_FOUND = "Book found: {}";
